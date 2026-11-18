@@ -1,2 +1,2 @@
-# Fast-Food-Analysis
-Utilizing public datasets to analyze trends in various fast food chains and popular items as the years and seasons go by using MySQL relational Databases.
+# Movie Analysis
+Utilizing public datasets to provide consumers with movie analytics to inform their next watches using MySQL relational Databases.

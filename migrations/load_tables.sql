@@ -81,3 +81,21 @@ SELECT
     i.id
 FROM imdb_top_1000_final i
 WHERE i.id NOT IN (SELECT IMDBId FROM Movie WHERE IMDBId IS NOT NULL);
+
+INSERT INTO workedOn (movie_id, studio_id)
+SELECT m.id, s.id
+FROM rotten_tomatoes_final AS t
+JOIN Movie AS m ON t.id = m.tmId
+JOIN Studio AS s ON t.id = t.studio_name = s.name;
+
+INSERT INTO credits (movie_id, celebrity_id)
+SELECT m.id, c.id
+FROM imdb_top_1000_final AS i
+JOIN Movie AS m ON i.id = m.IMDBId
+JOIN Celebrity AS c ON c.name = i.Director OR c.name = i.Star1 OR c.name = i.Star2 OR c.name = i.Star3 OR c.name = i.Star4;
+
+INSERT INTO credits(movie_id, celebrity_id)
+SELECT m.id, c.id
+FROM rotten_tomatoes_final AS t
+JOIN Movie AS m ON t.id = mtmId
+JOIN Celebrity AS c ON c.name LIKE t.directors OR c.name LIKE t.writers;

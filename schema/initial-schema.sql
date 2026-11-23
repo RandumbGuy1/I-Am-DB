@@ -57,15 +57,14 @@ CREATE TABLE workedOn (
     movieId INT NOT NULL,
     studioId INT NOT NULL,
     PRIMARY KEY (movieId, studioId),
-    CONSTRAINT fk_workedon_movie FOREIGN KEY (movieId) REFERENCES Movie(id) ON DELETE CASCADE,
-    CONSTRAINT fk_workedon_studio FOREIGN KEY (studioId) REFERENCES Studio(id) ON DELETE CASCADE
+    CONSTRAINT fk_workedon_movie FOREIGN KEY (movieId) REFERENCES Movie(id),
+    CONSTRAINT fk_workedon_studio FOREIGN KEY (studioId) REFERENCES Studio(id)
 );
 
 CREATE TABLE credits (
     movieId INT NOT NULL,
     celebrityId INT NOT NULL,
-    role VARCHAR(100),
     PRIMARY KEY (movieId, celebrityId),
-    CONSTRAINT fk_credits_movie FOREIGN KEY (movieId) REFERENCES Movie(id) ON DELETE CASCADE,
-    CONSTRAINT fk_credits_celebrity FOREIGN KEY (celebrityId) REFERENCES Celebrity(id) ON DELETE CASCADE
+    CONSTRAINT fk_credits_movie FOREIGN KEY (movieId) REFERENCES Movie(id),
+    CONSTRAINT fk_credits_celebrity FOREIGN KEY (celebrityId) REFERENCES Celebrity(id)
 );

@@ -61,7 +61,7 @@ SELECT DISTINCT
     id
 FROM rotten_tomatoes_final;
 
--- Add imdb data to movies by matching title and year in rotten tomatoes
+-- Add imdb data to movies matching by title and year in rotten tomatoes
 UPDATE Movie m
 JOIN imdb_top_1000_final i ON i.Series_Title = m.title AND i.Released_Year = m.releaseYear
 SET m.IMDBId = i.id,

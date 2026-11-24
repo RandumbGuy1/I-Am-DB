@@ -5,7 +5,7 @@ def add_id(input_csv: str, output_csv: str):
     df = pd.read_csv(input_csv, dtype=str)
 
     # Add a id column to every movie, used as the IMDb_Metrics id
-    df.insert(0, "id", range(1, len(df) + 1))
+    df.insert(0, "imdb_id", range(1, len(df) + 1))
 
     # Apollo 13 has a released year of "PG" replace it with 1995
     df.loc[df["Released_Year"] == "PG", "Released_Year"] = "1995"

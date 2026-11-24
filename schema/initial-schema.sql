@@ -1,4 +1,5 @@
-CREATE SCHEMA `iam_db` ;
+CREATE SCHEMA `iam_db`;
+USE iam_db;
 
 CREATE TABLE Studio(
 	id INT AUTO_INCREMENT PRIMARY KEY,
@@ -42,12 +43,9 @@ CREATE TABLE Movie(
 	genre VARCHAR(150),
     overview VARCHAR(2500),
     gross DECIMAL(15, 2),
-    directorId INT,
     studioID INT,
 	IMDBId INT UNIQUE,
     tmId INT UNIQUE,
-    CONSTRAINT fk_movie_director FOREIGN KEY (directorId) REFERENCES Celebrity(id),
-    CONSTRAINT fk_movie_studio FOREIGN KEY (studioId) REFERENCES Studio(id),
     CONSTRAINT fk_movie_imdb FOREIGN KEY (IMDbId) REFERENCES IMDb_Metrics(id),
     CONSTRAINT fk_movie_tm FOREIGN KEY (tmId) REFERENCES Tomato_Meter_Metrics(id)
 );
@@ -64,6 +62,7 @@ CREATE TABLE workedOn (
 CREATE TABLE credits (
     movieId INT NOT NULL,
     celebrityId INT NOT NULL,
+    isDirector BOOLEAN DEFAULT FALSE,
     PRIMARY KEY (movieId, celebrityId),
     CONSTRAINT fk_credits_movie FOREIGN KEY (movieId) REFERENCES Movie(id),
     CONSTRAINT fk_credits_celebrity FOREIGN KEY (celebrityId) REFERENCES Celebrity(id)

@@ -9,8 +9,8 @@ from pathlib import Path
 def add_countries(input_csv: str, output_csv: str, studio_col: str):
     df = pd.read_csv(input_csv, dtype=str)
 
-    # Dropped these because they broke imports and took up a ton of space
-    df = df.drop(columns=["movie_info", "cast"])
+    # Drop these columns to reduce csv size, we're exporting a different csv for directors and writers
+    df = df.drop(columns=["directors", "writers", "cast", "movie_info"])
 
     map_json = Path(__file__).resolve().parent / "studio_country_map.json"
     with open(map_json, encoding="utf-8") as f:
@@ -42,7 +42,7 @@ def add_countries(input_csv: str, output_csv: str, studio_col: str):
         return "Unknown"
 
     # Add a id column to every movie
-    df.insert(0, "id", range(1, len(df) + 1))
+    df.insert(0, "tm_id", range(1, len(df) + 1))
 
     # Convert studio col into lists of studio names split by "/"
     df[studio_col] = df[studio_col].str.split("/")
